@@ -10,54 +10,6 @@ function testError (obj, errorType) {
 }
 
 describe('json-size test', function () {
-  it('input object 1: must be equal', function () {
-    const obj = { a:{}, b:null };
-    testEqual(obj);
-  });
-
-  it('input object 2: must be equal', function () {
-    const obj = {};
-    testEqual(obj);
-  });
-
-  it('input object 3: must be equal', function () {
-    const obj = [ 123456789, { a:123 } ];
-    testEqual(obj);
-  });
-
-  it('input object 4: must be equal', function () {
-    const obj = { log:{ a:123 }, b:undefined };
-    testEqual(obj);
-  });
-
-  it('input object 5: must be equal', function () {
-    const obj = { a:{ b:{ c:123, d:'str' }, e: true, f:false } };
-    testEqual(obj);
-  });
-
-  it('input object 6: must be equal', function () {
-    const obj = { a:[] };
-    testEqual(obj);
-  });
-
-  it('input object 7: must be equal', function () {
-    const obj = { a:'"' };
-    testEqual(obj);
-  });
-
-  it('input object 8: must be equal', function () {
-    const obj = { a:{ b:{ c:{ d:{ e:[ { f:{}, g:[ { i:'"', j:'', k:{ l:null, m:undefined }, n:{ o:[], p:{}, q:true, r:false, t:'"test"', u:new Date(), v:function () { return 0; }, w:() => { return 1; }, x:async function () { return 2; }, y:async () => { return 3; } } } ] }, 123 ] } } } } };
-    testEqual(obj);
-  });
-
-  it('input object 9: must be equal', function () {
-    const obj = {};
-    for (let i = 0;i < 500000;i++) {
-      obj['test' + i] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    }
-    testEqual(obj);
-  });
-
   it('input is null: must be equal', function () {
     const obj = null;
     testEqual(obj);
@@ -116,5 +68,53 @@ describe('json-size test', function () {
   it('input is undefined: must throw error', function () {
     const obj = undefined;
     testError(obj, TypeError);
+  });
+
+  it('input object 1: must be equal', function () {
+    const obj = { a:{}, b:null };
+    testEqual(obj);
+  });
+
+  it('input object 2: must be equal', function () {
+    const obj = {};
+    testEqual(obj);
+  });
+
+  it('input object 3: must be equal', function () {
+    const obj = [ 123456789, { a:123 } ];
+    testEqual(obj);
+  });
+
+  it('input object 4: must be equal', function () {
+    const obj = { log:{ a:123 }, b:undefined };
+    testEqual(obj);
+  });
+
+  it('input object 5: must be equal', function () {
+    const obj = { a:{ b:{ c:123, d:'str' }, e: true, f:false } };
+    testEqual(obj);
+  });
+
+  it('input object 6: must be equal', function () {
+    const obj = { a:[] };
+    testEqual(obj);
+  });
+
+  it('input object 7: must be equal', function () {
+    const obj = { a:'"' };
+    testEqual(obj);
+  });
+
+  it('input object 8: must be equal', function () {
+    const obj = { a:{ b:{ c:{ d:{ e:[ { f:{}, g:[ { i:'"', j:'', k:{ l:null, m:undefined }, n:{ o:[], p:{}, q:true, r:false, t:'"test"', u:new Date(), v:function () { return 0; }, w:() => { return 1; }, x:async function () { return 2; }, y:async () => { return 3; } } }, null, undefined ] }, 123 ] } } } } };
+    testEqual(obj);
+  });
+
+  it('input object 9: must be equal', function () {
+    const obj = {};
+    for (let i = 0;i < 500000;i++) {
+      obj['test' + i] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    }
+    testEqual(obj);
   });
 });
