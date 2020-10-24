@@ -6,6 +6,11 @@ Get the byte size of an object after JSON.stringify
 npm i json-sizeof
 ```
 
+## Links
+[npm package](https://www.npmjs.com/package/json-sizeof)
+<br>
+[Github page](https://github.com/a179346/json-sizeof)
+
 ## Usage
 #### Example
 ```js

@@ -6,6 +6,10 @@
   "scripts": {
     "test": "mocha -b ./test"
   },
+  "files": [
+    "index.js",
+    "README.md"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/a179346/json-sizeof.git"
