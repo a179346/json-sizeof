@@ -1,5 +1,5 @@
 {
-  "name": "json-size",
+  "name": "json-sizeof",
   "version": "1.0.0",
   "description": "Get the byte size of an object after JSON.stringify",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/a179346/json-size.git"
+    "url": "git+https://github.com/a179346/json-sizeof.git"
   },
   "keywords": [
     "size",
@@ -19,6 +19,7 @@
     "object",
     "node",
     "json-size",
+    "json-sizeof",
     "object-size",
     "json-byte",
     "object-byte"
@@ -26,9 +27,9 @@
   "author": "a179346",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/a179346/json-size/issues"
+    "url": "https://github.com/a179346/json-sizeof/issues"
   },
-  "homepage": "https://github.com/a179346/json-size#readme",
+  "homepage": "https://github.com/a179346/json-sizeof#readme",
   "devDependencies": {
     "chai": "^4.2.0",
     "eslint": "^5.5.0",

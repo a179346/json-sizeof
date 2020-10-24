@@ -1,4 +1,4 @@
-function jsonSize (input) {
+function jsonSizeOf (input) {
   if (input === undefined) throw new TypeError('input cannot be undefined');
   if (typeof (input) === 'function') throw new TypeError('input cannot be function');
 
@@ -96,4 +96,4 @@ function quote (string) {
     '"' + string + '"';
 }
 
-module.exports = jsonSize;
+module.exports = jsonSizeOf;

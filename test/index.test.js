@@ -1,15 +1,15 @@
-const jsonSize = require('../index.js');
+const jsonSizeOf = require('../index.js');
 const { expect } = require('chai');
 
 function testEqual (obj) {
-  expect(jsonSize(obj)).to.equal(Buffer.byteLength(JSON.stringify(obj)));
+  expect(jsonSizeOf(obj)).to.equal(Buffer.byteLength(JSON.stringify(obj)));
 }
 
 function testError (obj, errorType) {
-  expect(function () { jsonSize(obj); }).to.throw(errorType);
+  expect(function () { jsonSizeOf(obj); }).to.throw(errorType);
 }
 
-describe('json-size test', function () {
+describe('json-sizeof test', function () {
   it('input is null: must be equal', function () {
     const obj = null;
     testEqual(obj);
