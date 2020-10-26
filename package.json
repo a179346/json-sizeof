@@ -4,7 +4,7 @@
   "description": "Get the byte size of an object after JSON.stringify",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -b ./test"
+    "test": "mocha -b --timeout 30000 ./test"
   },
   "files": [
     "index.js",

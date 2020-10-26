@@ -70,6 +70,18 @@ describe('json-sizeof test', function () {
     testError(obj, TypeError);
   });
 
+  it('input is cyclic obejct: must throw error', function () {
+    const obj = {};
+    obj.a = obj;
+    testError(obj, TypeError);
+  });
+
+  it('input is cyclic array: must throw error', function () {
+    const obj = [];
+    obj[0] = obj;
+    testError(obj, TypeError);
+  });
+
   it('input object 1: must be equal', function () {
     const obj = { a:{}, b:null };
     testEqual(obj);
@@ -116,5 +128,13 @@ describe('json-sizeof test', function () {
       obj['test' + i] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     }
     testEqual(obj);
+  });
+
+  it('large input object: should not out of memory', function () {
+    const obj = {};
+    for (let i = 0;i < 8000000;i++) {
+      obj['test' + i] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    }
+    expect(jsonSizeOf(obj)).to.be.a('number');
   });
 });
