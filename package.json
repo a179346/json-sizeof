@@ -1,6 +1,6 @@
 {
   "name": "json-sizeof",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Get the byte size of an object after JSON.stringify",
   "main": "index.js",
   "scripts": {
