@@ -2,7 +2,7 @@ function jsonSizeOf (input) {
   if (input === undefined) throw new TypeError('input cannot be undefined');
   if (typeof (input) === 'function') throw new TypeError('input cannot be function');
 
-  return sizeOf('', { '':input }, []);
+  return sizeOf('', { '':input }, new WeakSet());
 }
 
 const NULL_LEN = Buffer.byteLength('null');
@@ -14,9 +14,9 @@ function sizeOf (key, holder, seenObjs) {
   let value = holder[key];
 
   if (value && typeof (value) === 'object') {
-    if (seenObjs.includes(value))
+    if (seenObjs.has(value))
       throw new TypeError('cyclic object value');
-    seenObjs.push(value);
+    seenObjs.add(value);
 
     if (typeof value.toJSON === 'function')
       value = value.toJSON(key);
