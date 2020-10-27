@@ -11,11 +11,13 @@ const CUR_BRA_LEN = Buffer.byteLength('{}');
 const COMMA_LEN = Buffer.byteLength(',');
 const COLON_LEN = Buffer.byteLength(':');
 function sizeOf (key, holder, seenObjs) {
-  let value = holder[key];
+  let v,
+    value = holder[key];
 
   if (value && typeof (value) === 'object') {
     if (seenObjs.has(value))
       throw new TypeError('cyclic object value');
+    v = value;
     seenObjs.add(value);
 
     if (typeof value.toJSON === 'function')
@@ -24,18 +26,18 @@ function sizeOf (key, holder, seenObjs) {
 
   switch (typeof (value)) {
     case 'string':
-      return Buffer.byteLength(quote(value));
+      return sizeOfReturn(quote(value), v, seenObjs);
 
     case 'number':
-      return Buffer.byteLength((isFinite(value) ? String(value) : 'null'));
+      return sizeOfReturn(isFinite(value) ? String(value) : 'null', v, seenObjs);
 
     case 'boolean':
     case 'null':
-      return Buffer.byteLength(String(value));
+      return sizeOfReturn(String(value), v, seenObjs);
 
     case 'object':
       if (!value)
-        return NULL_LEN;
+        return sizeOfReturn(NULL_LEN, v, seenObjs);
 
       if (Array.isArray(value)) {
         let i,
@@ -51,7 +53,7 @@ function sizeOf (key, holder, seenObjs) {
           size = sizeOf(i, value, seenObjs);
           bytes += size !== undefined ? size : NULL_LEN;
         }
-        return bytes;
+        return sizeOfReturn(bytes, v, seenObjs);
       } else {
         let k,
           size,
@@ -69,9 +71,15 @@ function sizeOf (key, holder, seenObjs) {
             }
           }
         }
-        return bytes;
+        return sizeOfReturn(bytes, v, seenObjs);
       }
   }
+}
+
+function sizeOfReturn (ret, v, seenObjs) {
+  if (v) seenObjs.delete(v);
+  if (typeof (ret) === 'number') return ret;
+  return Buffer.byteLength(ret);
 }
 
 // eslint-disable-next-line

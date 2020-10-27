@@ -130,6 +130,14 @@ describe('json-sizeof test', function () {
     testEqual(obj);
   });
 
+  it('input object 10: must be equal', function () {
+    const obj = {};
+    const obj2 = { a: 'a' };
+    obj.a = obj2;
+    obj.b = obj2;
+    testEqual(obj);
+  });
+
   it('large input object: should not out of memory', function () {
     const obj = {};
     for (let i = 0;i < 8000000;i++) {
