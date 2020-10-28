@@ -9,6 +9,10 @@ function testError (obj, errorType) {
   expect(function () { jsonSizeOf(obj); }).to.throw(errorType);
 }
 
+function testNotError (obj) {
+  expect(jsonSizeOf(obj)).to.be.a('number');
+}
+
 describe('json-sizeof test', function () {
   it('input is null: must be equal', function () {
     const obj = null;
@@ -143,6 +147,6 @@ describe('json-sizeof test', function () {
     for (let i = 0;i < 8000000;i++) {
       obj['test' + i] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     }
-    expect(jsonSizeOf(obj)).to.be.a('number');
+    testNotError(obj);
   });
 });
