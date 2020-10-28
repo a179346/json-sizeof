@@ -1,4 +1,4 @@
-# json-sizeof
+# json-sizeof [![Build Status](https://travis-ci.org/a179346/json-sizeof.svg?branch=main)](https://travis-ci.org/github/a179346/json-sizeof)
 Get the byte size of an object after JSON.stringify
 
 ## Installation
