@@ -1,8 +1,8 @@
 # json-sizeof [![Build Status](https://travis-ci.org/a179346/json-sizeof.svg?branch=main)](https://travis-ci.org/github/a179346/json-sizeof)
-Get the byte size of an object after JSON.stringify
+> Get the byte size of an object after JSON.stringify
 
 ## Installation
-```js
+```
 npm i json-sizeof
 ```
 
@@ -25,11 +25,24 @@ const obj = {
   },
 };
 
-console.log(jsonSizeOf(obj));
+const bytes = jsonSizeOf(obj);
 // expected 57
 ```
 
 ## Why
 jsonSizeOf(obj) equals to Buffer.byteLength(JSON.stringify(obj)).
 <br>
-but is faster and less likely to cause heap out of memory
+but is **faster** and **less likely to cause "Javascript heap out of memory"**
+```js
+const obj = {};
+for (let i = 0;i < 8000000;i++) {
+  obj['test' + i] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+}
+
+// expected: 342888891
+jsonSizeOf(obj);
+
+// The following line will cause "JavaScript heap out of memory" fatal error
+// if you do not maually increase the memory usage of node app.
+Buffer.byteLength(JSON.stringify(obj));
+```
