@@ -36,7 +36,7 @@ npm i json-sizeof
 ## 📋 Usage
 #### Example
 ```js
-const jsonSizeOf = require('json-sizeof');
+const { jsonSizeOf } = require('json-sizeof');
 
 const obj = {
   str1: 'I am a string!',
