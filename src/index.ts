@@ -1,8 +1,8 @@
-function jsonSizeOf (input) {
+function jsonSizeOf (input: any): number {
   if (input === undefined) throw new TypeError('input cannot be undefined');
   if (typeof (input) === 'function') throw new TypeError('input cannot be function');
 
-  return sizeOf('', { '':input }, new WeakSet());
+  return sizeOf('', { '': input }, new WeakSet()) || 0;
 }
 
 const NULL_LEN = Buffer.byteLength('null');
@@ -10,7 +10,7 @@ const SQU_BRA_LEN = Buffer.byteLength('[]');
 const CUR_BRA_LEN = Buffer.byteLength('{}');
 const COMMA_LEN = Buffer.byteLength(',');
 const COLON_LEN = Buffer.byteLength(':');
-function sizeOf (key, holder, seenObjs) {
+function sizeOf (key: string | number, holder: any, seenObjs: WeakSet<any>) {
   let v,
     value = holder[key];
 
@@ -32,7 +32,7 @@ function sizeOf (key, holder, seenObjs) {
       return sizeOfReturn(isFinite(value) ? String(value) : 'null', v, seenObjs);
 
     case 'boolean':
-    case 'null':
+    // case 'null':
       return sizeOfReturn(String(value), v, seenObjs);
 
     case 'object':
@@ -76,7 +76,7 @@ function sizeOf (key, holder, seenObjs) {
   }
 }
 
-function sizeOfReturn (ret, v, seenObjs) {
+function sizeOfReturn (ret: number | string, v: any, seenObjs: WeakSet<any>) {
   if (v) seenObjs.delete(v);
   if (typeof (ret) === 'number') return ret;
   return Buffer.byteLength(ret);
@@ -84,7 +84,7 @@ function sizeOfReturn (ret, v, seenObjs) {
 
 // eslint-disable-next-line
 const rx_escapable = /[\\"\u0000-\u001f\u007f-\u009f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
-const meta = {    // table of character substitutions
+const meta: any = {    // table of character substitutions
   '\b': '\\b',
   '\t': '\\t',
   '\n': '\\n',
@@ -94,7 +94,7 @@ const meta = {    // table of character substitutions
   '\\': '\\\\'
 };
 
-function quote (string) {
+function quote (string: string) {
 
   // If the string contains no control characters, no quote characters, and no
   // backslash characters, then we can safely slap some quotes around it.
@@ -112,4 +112,5 @@ function quote (string) {
     : '"' + string + '"';
 }
 
-module.exports = jsonSizeOf;
+export default jsonSizeOf;
+export { jsonSizeOf };
